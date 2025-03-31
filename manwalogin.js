@@ -1,4 +1,4 @@
-const url = "https://manwa.me/ucenter";  // 访问用户中心，验证登录状态
+const url = "https://manwa.me/login";  // 访问用户中心，验证登录状态
 
 const headers = {
     "Host": "manwa.me",
