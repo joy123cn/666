@@ -1,20 +1,9 @@
-// 2024-02-19 10:45
-
-let body = "";
-let obj = JSON.parse($request.body);
-const isQuanX = typeof $task !== "undefined";
-
-if (obj.placementNo === "0007") {
-  body =
-    '{"code":"00","materialsList":[{"billMaterialsId":"255","filePath":"h","creativeType":1}],"advertParam":{"skipTime":1}}';
-} else if (obj.placementNo === "G0054") {
-  body = '{"code":"00","materialsList":[]}';
+// Quantumult X 自动抓取最新 Cookie 并保存
+var cookie = $request.headers["Cookie"];
+if (cookie) {
+    $persistentStore.write(cookie, "manwa_cookie");  // 把 Cookie 存储到本地
+    $notify("Manwa Cookie 更新成功 ✅", "", "新 Cookie 已保存！");
 } else {
-  body = '{"code":"00","message":"无广告返回"}';
+    $notify("Manwa Cookie 更新失败 ❌", "", "请手动检查网站是否变更！");
 }
-
-if (isQuanX) {
-  $done({ body });
-} else {
-  $done({ response: { body } });
-}
+$done();
