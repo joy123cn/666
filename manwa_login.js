@@ -1,9 +1,9 @@
-const url = "https://manwa.me/login";  // 访问用户中心，验证登录状态
+const url = "https://manwa.me/ucenter";  // 访问用户中心，验证登录状态
 
-// 读取存储的最新 Cookie
-var cookie = $persistentStore.read("manwa_cookie");
+// 读取 Quantumult X 存储的最新 Cookie
+var cookie = $prefs.valueForKey("manwa_cookie");
 if (!cookie) {
-    $notify("Manwa 登录失败 ❌", "", "没有找到存储的 Cookie，请先访问网站更新 Cookie！");
+    $notify("❌ Manwa 登录失败", "", "没有找到 Cookie，请先访问 Manwa.me 更新！");
     $done();
 }
 
@@ -22,7 +22,7 @@ const headers = {
     "Referer": "https://manwa.me/login.html",
     "Connection": "keep-alive",
     "Sec-Fetch-Dest": "empty",
-    "Cookie": "PHPSESSID=f2a9b884c92e1d52fb26e5fdd56a11f6; uid=1680950; username=forever123cn"
+    "Cookie": cookie
 };
 
 // 发送 GET 请求，验证是否已登录
@@ -35,13 +35,13 @@ const request = {
 $task.fetch(request).then(response => {
     console.log("访问用户中心返回数据: " + response.body);
     if (response.body.includes("退出登录")) {  // 检查返回内容，判断是否已登录
-        $notify("Manwa 免登录成功 ✅", "", "已经使用最新 Cookie 直接访问用户中心！");
+        $notify("✅ Manwa 免登录成功", "", "已使用最新 Cookie 直接访问用户中心！");
     } else {
-        $notify("Manwa 登录失败 ❌", "", "Cookie 可能已失效，需要更新！");
+        $notify("❌ Manwa 登录失败", "", "Cookie 可能已失效，需要更新！");
     }
     $done();
 }, reason => {
     console.log("请求失败: " + reason.error);
-    $notify("Manwa 登录失败 ❌", "", reason.error);
+    $notify("❌ Manwa 登录失败", "", reason.error);
     $done();
 });
