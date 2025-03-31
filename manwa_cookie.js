@@ -1,9 +1,9 @@
-// Quantumult X 自动抓取最新 Cookie 并保存
-var cookie = $request.headers["Cookie"];
+// Quantumult X 自动获取并存储最新 Cookie
+var cookie = $response.headers["Set-Cookie"];
 if (cookie) {
-    $persistentStore.write(cookie, "manwa_cookie");  // 把 Cookie 存储到本地
-    $notify("Manwa Cookie 更新成功 ✅", "", "新 Cookie 已保存！");
+    $prefs.setValueForKey(cookie, "manwa_cookie");  // 存储 Cookie
+    $notify("✅ Manwa.me Cookie 更新成功", "", "新 Cookie 已保存！");
 } else {
-    $notify("Manwa Cookie 更新失败 ❌", "", "请手动检查网站是否变更！");
+    $notify("❌ Manwa.me Cookie 更新失败", "", "请手动检查！");
 }
 $done();
