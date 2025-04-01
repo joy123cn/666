@@ -1,44 +1,45 @@
-const url = "https://manwa.me/login";
-const username = "forever123cn"; // 你的用户名
-const password = "zrh1234@com"; // 你的密码
-const captcha = ""; // 如果验证码可绕过，则留空
+let oldCookie = $prefs.valueForKey("manwa_cookie");
 
+const url = `https://manwa.me/login`;  // 访问需要登录的页面
 const headers = {
-    "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-    "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Mobile/15E148 Safari/604.1",
-    "Referer": "https://manwa.me/login.html",
-    "Origin": "https://manwa.me",
-    "X-Requested-With": "XMLHttpRequest"
+    "Cookie": oldCookie || "",  // 使用存储的 Cookie
+    "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Mobile/15E148 Safari/604.1"
 };
 
-const body = `username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}&captcha=${encodeURIComponent(captcha)}`;
+const myRequest = { url: url, headers: headers };
 
-const request = {
-    url: url,
-    method: "POST",
-    headers: headers,
-    body: body
-};
+$task.fetch(myRequest).then(response => {
+    const newCookie = response.headers['Set-Cookie'];
+    let logMessage = `📃 **Manwa 自动登录日志**\n\n`;
 
-$task.fetch(request).then(response => {
-    if (response.statusCode === 200) {
-        const setCookie = response.headers['Set-Cookie'];
-        if (setCookie) {
-            let cookie = setCookie.match(/PHPSESSID=.*?;/)[0];
-            $prefs.setValueForKey(cookie, "manwa_cookie");
-            console.log("✅ 自动登录成功，Cookie 已更新：" + cookie);
-            $notify("🎉 Manwa 自动登录成功", "已更新 Cookie", cookie);
+    if (newCookie) {
+        let match = newCookie.match(/PHPSESSID=.*?;/);
+        if (match) {
+            let session = match[0];
+            if (session !== oldCookie) {  // 只有新 Cookie 变更时才更新
+                $prefs.setValueForKey(session, "manwa_cookie");
+                logMessage += `✅ **Cookie 已更新**: ${session}\n`;
+                $notify("🎉 Manwa 自动登录成功", "已更新 Cookie", session);
+            } else {
+                logMessage += `ℹ️ **Cookie 未变化**，继续使用：${oldCookie}\n`;
+            }
         } else {
-            console.log("⚠️ 自动登录失败，未获取到 Set-Cookie");
-            $notify("⚠️ Manwa 自动登录失败", "未获取到 Cookie，请检查账号状态", "");
+            logMessage += `⚠️ **Cookie 更新失败**，未找到 PHPSESSID\n`;
+            $notify("⚠️ Manwa 自动登录失败", "未找到新的 PHPSESSID", "");
         }
     } else {
-        console.log("❌ 登录失败，状态码：" + response.statusCode);
-        $notify("❌ Manwa 登录失败", "服务器返回错误：" + response.statusCode, "");
+        logMessage += `❌ **服务器未返回 Set-Cookie，可能需要重新手动登录**\n`;
+        $notify("❌ Manwa 自动登录失败", "可能需要手动登录获取新的 Cookie", "");
     }
+
+    // 记录完整的访问数据
+    logMessage += `\n📝 **HTTP 状态码**: ${response.statusCode}\n`;
+    logMessage += `📥 **响应头部**: ${JSON.stringify(response.headers, null, 2)}\n`;
+    logMessage += `📄 **网页内容**: ${response.body.substring(0, 500)}...（仅显示前 500 字符）`;
+
+    console.log(logMessage);
     $done();
 }, reason => {
-    console.log("❌ 请求失败：" + reason.error);
-    $notify("❌ Manwa 登录请求失败", reason.error, "");
+    console.log("❌ 网络请求失败：" + reason.error);
     $done();
 });
