@@ -3,22 +3,22 @@ if ($request.method !== "POST") {
     $done({});
 }
 
-const setCookie = $response.headers['Set-Cookie'];
-
+// 获取 Set-Cookie 头部
+const setCookie = $response.headers["Set-Cookie"];
 if (setCookie) {
     let match = setCookie.match(/PHPSESSID=.*?;/);
     if (match) {
-        let cookie = match[0];
-        $prefs.setValueForKey(cookie, "manwa_cookie");
-        console.log("✅ 登录成功，Cookie 已保存：" + cookie);
-        $notify("🎉 Manwa 登录成功", "已获取并存储 Cookie", cookie);
+        let session = match[0];
+        $prefs.setValueForKey(session, "manwa_cookie");  // 存储 Cookie
+        console.log("✅ 登录成功，存储最新 Cookie：" + session);
+        $notify("🎉 Manwa 登录成功", "已获取并存储最新 Cookie", session);
     } else {
-        console.log("⚠️ Cookie 存储失败，未找到 PHPSESSID");
-        $notify("⚠️ Manwa 登录失败", "未找到有效的 Cookie", "");
+        console.log("⚠️ 登录成功，但未找到 PHPSESSID");
+        $notify("⚠️ Manwa 登录成功", "但未找到 PHPSESSID", "");
     }
 } else {
-    console.log("❌ 登录失败，未返回 Set-Cookie 头");
-    $notify("❌ Manwa 登录失败", "服务器未返回 Cookie，可能是账号或验证码错误", "");
+    console.log("❌ 服务器未返回 Set-Cookie，可能登录失败");
+    $notify("❌ Manwa 登录失败", "服务器未返回 Cookie", "");
 }
 
 $done({});
