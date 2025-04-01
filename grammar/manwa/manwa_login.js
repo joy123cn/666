@@ -11,7 +11,7 @@ const myRequest = { url: url, headers: headers };
 $task.fetch(myRequest).then(response => {
     const newCookie = response.headers['Set-Cookie'];
     let logMessage = `📃 **Manwa 自动登录日志**\n\n`;
-    let notifyTitle = "🎉 Manwa 自动登录";
+    let notifyTitle = "🎉 Manwa 自动登录成功";
     let notifyBody = "";
 
     if (newCookie) {
