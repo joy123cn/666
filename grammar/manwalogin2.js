@@ -86,7 +86,7 @@ function login() {
         $done();
     }).catch(error => {
         console.log("登录请求失败: " + error);
-        $notify("manwa.me 登录失败 ❌", "", "请求错误: " + error);
+        $notify("⚠️manwa.me 登录失败 ❌", "", "请求错误: " + error);
         $done();
     });
 }
