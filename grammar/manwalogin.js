@@ -19,7 +19,7 @@ const request = {
 $task.fetch(request).then(response => {
     console.log("访问用户中心返回数据: " + response.body);
     
-    if (response.body.includes("for123cn")) {  // 检查返回的 HTML 是否包含用户名
+    if (response.body.includes("forever123cn")) {  // 检查返回的 HTML 是否包含用户名
         $notify("manwa.me 免登录成功 ✅", "", "已成功访问用户中心！");
     } else {
         $notify("manwa.me 登录状态失效 ❌", "", "Cookie 可能已失效，需要更新！");
