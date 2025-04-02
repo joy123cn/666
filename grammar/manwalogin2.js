@@ -7,7 +7,7 @@ const check_headers = {
     "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.1 Mobile/15E148 Safari/604.1",
     "Referer": "https://manwa.me/ucenter",
     "Connection": "keep-alive",
-    "Cookie": stored_cookie
+    "Cookie": "PHPSESSID=373c00b70f1c88287ba7f3883599b879; uid=1680950; username=forever123cn"
 };
 
 // 发送 GET 请求，检查用户是否已登录
