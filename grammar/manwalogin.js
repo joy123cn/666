@@ -14,7 +14,7 @@ const headers = {
     "Referer": "https://manwa.me/login.html",
     "Connection": "keep-alive",
     "Sec-Fetch-Dest": "empty",
-    "Cookie": "PHPSESSID=f2a9b884c92e1d52fb26e5fdd56a11f6; uid=1680950; username=forever123cn"
+    "Cookie": "PHPSESSID=373c00b70f1c88287ba7f3883599b879; uid=1680950; username=forever123cn"
 };
 
 // 发送 GET 请求，验证是否已登录
