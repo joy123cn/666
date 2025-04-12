@@ -6,7 +6,7 @@
 // ======quantumultx配置如下：=======
 
 [rewrite_local]
-^https:\/\/manwa\.me\/login$ url script-response-body https://gist.githubusercontent.com/joy123cn/0ba1ea52b1d70ac2c15622eb5e175942/raw/manwa_cookie3.js
+^https:\/\/manwa\.me\/login$ url script-response-body https://raw.githubusercontent.com/joy123cn/666/refs/heads/main/manwa_cookie2.js
 
 [mitm]
 hostname = manwa.me
