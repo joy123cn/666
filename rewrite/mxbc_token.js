@@ -1,9 +1,10 @@
 /*
 *
 *
-
+脚本名称：蜜雪冰城获取token
+用途说明：用于quantumultx 重写
 [rewrite_local]
-^https:\/\/mxsa\.mxbc\.net\/api\/v1\/customer\/info url script-request-header mxbc_token.js
+^https:\/\/mxsa\.mxbc\.net\/api\/v1\/customer\/info url script-request-header https://raw.githubusercontent.com/joy123cn/666/main/rewrite/mxbc_token.js
 
 [mitm]
 hostname = mxsa.mxbc.net
