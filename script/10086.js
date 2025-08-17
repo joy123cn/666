@@ -3,7 +3,7 @@
 *
 
 [rewrite_local]
-^https?://res\.app\.coc\.10086\.cn/qwhdcdn_cmcc-cs_cn/prd-mgcenter/.*\.png\?width=.*&fmt=webp&height=.*$ url script-response-body https://gist.githubusercontent.com/joy123cn/8dcd0f0128987c50cd57cce5094409f4/raw/ad.js
+^https?://res\.app\.coc\.10086\.cn/qwhdcdn_cmcc-cs_cn/prd-mgcenter/.*\.png\?width=.*&fmt=webp&height=.*$ url script-response-body https://raw.githubusercontent.com/joy123cn/666/main/script/10086.js
 
 
 [MITM]
