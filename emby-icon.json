@@ -2,6 +2,8 @@
   "name":"私人emby专用", "description":"自用", 
   "icons":[
     {"name":"saodu", "url":"https:\/\/raw.githubusercontent.com\/joy123cn\/666\/main\/icons\/saodu.png"},
-    {"name":"saodu1", "url":"https:\/\/raw.githubusercontent.com\/joy123cn\/666\/main\/icons\/saodu1.png"}
+    {"name":"saodu1", "url":"https:\/\/raw.githubusercontent.com\/joy123cn\/666\/main\/icons\/saodu1.png"},
+    {"name":"saodu3", "url":"https://raw.githubusercontent.com/joy123cn/666/main/icons/saodu3.png"},
+    {"name":"saodu4", "url":"https://raw.githubusercontent.com/joy123cn/666/main/icons/saodu4.png"}
  ]
 }
