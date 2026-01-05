@@ -47,28 +47,3 @@ hostname = *.xmcdn.com, *.ximalaya.com, 61.172.194.*, 180.153.*.*, 180.153.255.*
 *
 */
 
-// xmla-header.js
-// 喜马拉雅 Quantumult X 专用请求头修改脚本（修复版，直接填写 Cookie）
-
-// ==================== 请手动填写区域 ====================
-const COOKIE = "在这里粘贴你的完整喜马拉雅 Cookie";     // ← 必填！整行替换
-const USER_AGENT = "Ximalaya/9.3.60 (iPhone; iOS 17.1; Scale/3.00)";  // 选填，建议填写
-// ========================================================
-
-let headers = $request.headers || {};
-
-// 注入 Cookie
-if (COOKIE && COOKIE !== "在这里粘贴你的完整喜马拉雅 Cookie" && COOKIE.trim() !== "") {
-    headers["Cookie"] = COOKIE.trim();
-    console.log("✅ 喜马拉雅 Cookie 已成功注入");
-} else {
-    console.log("❌ 未检测到有效 Cookie！VIP 解锁将失效，请编辑 xmla-header.js 并填写会员 Cookie");
-}
-
-// 注入 User-Agent（可选）
-if (USER_AGENT && USER_AGENT !== "Ximalaya/9.3.60 (iPhone; iOS 17.1; Scale/3.00)") {
-    headers["User-Agent"] = USER_AGENT;
-    console.log("✅ 喜马拉雅 User-Agent 已注入");
-}
-
-$done({ headers: headers });
