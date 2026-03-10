@@ -1,0 +1,8 @@
+# 规则名称：missevan（猫耳FM国际版）
+
+DOMAIN-SUFFIX,maoercdn.com
+DOMAIN,data.missevan.com
+DOMAIN,static.maoercdn.com
+DOMAIN,app.missevan.com
+DOMAIN,fm.missevan.com
+DOMAIN,utoken.umeng.com
